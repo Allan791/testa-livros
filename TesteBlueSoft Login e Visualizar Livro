@@ -1,0 +1,93 @@
+@Resource
+public class UsuariosController {
+  //...
+  @Get("/login")
+  public void loginForm() {
+    
+  }
+}
+<form action="<c:url value="/login"/>" method="POST">
+  <fieldset>
+    <legend>Efetue o login</legend>
+        
+    <label for="login">Login:</label>
+      <input id="login" type="text" name="usuario.login"/>
+
+    <label for="senha">Senha:</label>
+      <input id="senha" type="password" name="usuario.senha"/>
+
+    <button type="submit">Login</button>
+  </fieldset>
+</form>
+
+@Component
+@SessionScoped
+public class UsuarioWeb {
+
+  private Usuario logado;
+
+  public void login(Usuario usuario) {
+    this.logado = usuario;
+  }
+  
+  public String getNome() {
+    return logado.getNome();
+  }
+  
+  public boolean isLogado() {
+    return logado != null;
+  }
+}
+
+try {
+    String url = "https://www.submarino.com.br/";
+    JEditorPane editorPane = new JEditorPane(url);
+    editorPane.setEditable(false);
+    editorPane.addHyperlinkListener(new MyHyperlinkListener());
+} catch (IOException e) {
+}
+
+class MyHyperlinkListener implements HyperlinkListener {
+    public void hyperlinkUpdate(HyperlinkEvent evt) {
+        if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            JEditorPane pane = (JEditorPane)evt.getSource();
+            try {
+                // Show the new page in the editor pane.
+                pane.setPage(evt.getURL());
+            } catch (IOException e) {
+            }
+        }
+    }
+}
+
+try {
+    String url = "https://www.submarino.com.br/produto/134171201/livro-beren-e-luthien";
+    JEditorPane editorPane = new JEditorPane(url);
+    editorPane.setEditable(false);
+    editorPane.addHyperlinkListener(new MyHyperlinkListener());
+} catch (IOException e) {
+}
+
+class MyHyperlinkListener implements HyperlinkListener {
+    public void hyperlinkUpdate(HyperlinkEvent evt) {
+        if (evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            JEditorPane pane = (JEditorPane)evt.getSource();
+            try {
+                // Show the new page in the editor pane.
+                pane.setPage(evt.getURL());
+            } catch (IOException e) {
+            }
+        }
+    }
+}
+
+@Intercepts
+public class AutorizacaoAuthor implements Author {
+
+  private final UsuarioWeb usuario;
+
+  public AutorizacaoAuthor(UsuarioWeb Author) {
+    this.usuario = usuario;
+  }
+
+}
